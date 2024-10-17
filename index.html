@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        justify-content: center;
+        align-items: center;
+        background-color: darkslategray;
+    }
+    #mainbox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 18.75rem;
+        height: 25rem;
+        background-color: rgb(70, 136, 86);
+        font-size: 1.5625rem;
+        padding: 1.25rem;
+        color: white;
+        font-weight: 700; 
+        border-radius: 0.5rem;
+        border: solid black 0.2rem;
+    }
+    form{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    table{
+        width: 100%;
+    }
+    tr{
+        width: 100%;
+    }
+
+    input{
+        width:100%;
+        height: 1.875rem;
+        border-radius: .625rem
+    }
+    button{
+        text-align: center;
+        margin-top: 1rem;
+        width: 6.25rem;
+        height: 2rem;
+        border-radius: 0.7rem;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    #twobox{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 18.75rem;
+        height: 25rem;
+        background-color: rgb(70, 136, 86);
+        font-size: 1.25rem;
+        padding: 1.25rem;
+        color: white;
+        font-weight: 700; 
+        border-radius: 0.5rem;
+        border: solid black 0.2rem;
+        text-align: center;
+    }
+ 
+
+
+
+</style>
+
+
+
+</head>
+<body>
+    <div>
+        <h1 style="margin-top: 2.5rem;">User Registration</h1>
+        <h3 id="result"></h3>
+    </div>
+    <div id="twobox">
+        <h3 style="margin-bottom: 1rem;">Full Stack Web Developer</h3>
+        <p>Full-stack developers are versatile and can work on a wide range of projects, from small web applications to complex enterprise-level systems. </p>
+    
+    </div>
+    <div id="mainbox">
+        <form id="form">
+            <table>
+                <tr>
+                    <td>Name</td>    
+                </tr>
+                <tr>
+                    <td><input id="name" type="text" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>                   
+                </tr>
+                <tr>
+                    <td><input id="email" type="email" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>     
+                </tr>
+                <tr>
+                    <td><input id="password" type="password" required></td>
+                </tr>
+            </table>
+            <button id="submitButton" type="submit" disabled>Submit</button>
+        </form>
+    </div>
+
+    <script>
+        var form = document.getElementById("form")
+        var result = document.getElementById("result")
+        var mainbox = document.getElementById("mainbox")
+        var twobox = document.getElementById("twobox")
+        var submitButton = document.getElementById("submitButton")
+
+        document.getElementById("password").addEventListener("keyup", function() {
+            var password = this.value;
+            var letpassword = password.length;
+            // Check if the password length is between 6 and 10
+            if (letpassword >= 6 && letpassword <= 10) {
+                submitButton.removeAttribute("disabled");
+            } else {
+                submitButton.setAttribute("disabled", "true");
+            }
+        })
+            
+        form.addEventListener("submit",function(event)
+        {
+            event.preventDefault();
+            
+            var name = document.getElementById('name').value
+            var password = document.getElementById("password").value
+            var letname = name.charAt(0).toUpperCase()
+            var letpassword = password.length
+            
+            
+            if(name.charAt(0)===letname && name !==name.toLowerCase())
+            {
+                if(letpassword>=6 && letpassword<=10)
+                {
+                    result.textContent="Successfully registered"
+                    twobox.style.display="flex"
+                    mainbox.style.display="none"
+                    
+                }
+                else
+                {
+                    alert("Password should contain 6 to 10 characters")
+                    password.reset();
+                    submitButton.setAttribute("disabled", "true");
+                    
+                }
+            }
+            else
+            {
+                alert("Name should start with an uppercase")
+                form.reset();
+                result.textContent = "Retry..."
+                submitButton.setAttribute("disabled", "true")
+                
+            }
+
+        })
+    </script>
+</body>
+</html>
